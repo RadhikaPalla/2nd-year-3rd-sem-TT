@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 50  // Maximum number of employees
+
+struct Employee {
+    int id;
+    char name[50];
+    char department[30];
+    float salary;
+};
+
+// Function to display an employee record
+void displayEmployee(struct Employee emp) {
+    printf("ID: %d\n", emp.id);
+    printf("Name: %s\n", emp.name);
+    printf("Department: %s\n", emp.department);
+    printf("Salary: %.2f\n", emp.salary);
+    printf("--------------------------\n");
+}
+
+int main() {
+    struct Employee emp[MAX];
+    int n = 0;  // Number of employees
+    int choice, i, searchId;
+
+    do {
+        printf("\n=== Employee Management System ===\n");
+        printf("1. Add Employee\n");
+        printf("2. Display All Employees\n");
+        printf("3. Search Employee by ID\n");
+        printf("4. Update Employee Salary\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                if(n < MAX) {
+                    printf("Enter Employee ID: ");
+                    scanf("%d", &emp[n].id);
+                    printf("Enter Name: ");
+                    scanf(" %[^\n]", emp[n].name);  // Reads string with spaces
+                    printf("Enter Department: ");
+                    scanf(" %[^\n]", emp[n].department);
+                    printf("Enter Salary: ");
+                    scanf("%f", &emp[n].salary);
+                    n++;
+                } else {
+                    printf("Employee limit reached!\n");
+                }
+                break;
+
+            case 2:
+                if(n == 0) {
+                    printf("No employee records found.\n");
+                } else {
+                    printf("\nAll Employee Records:\n");
+                    printf("--------------------------\n");
+                    for(i = 0; i < n; i++) {
+                        displayEmployee(emp[i]);
+                    }
+                }
+                break;
+
+            case 3:
+                printf("Enter Employee ID to search: ");
+                scanf("%d", &searchId);
+                for(i = 0; i < n; i++) {
+                    if(emp[i].id == searchId) {
+                        printf("\nEmployee Found:\n");
+                        displayEmployee(emp[i]);
+                        break;
+                    }
+                }
+                if(i == n)
+                    printf("Employee with ID %d not found.\n", searchId);
+                break;
+
+            case 4:
+                printf("Enter Employee ID to update salary: ");
+                scanf("%d", &searchId);
+                for(i = 0; i < n; i++) {
+                    if(emp[i].id == searchId) {
+                        printf("Enter new salary: ");
+                        scanf("%f", &emp[i].salary);
+                        printf("Salary updated successfully.\n");
