@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+
+union BankAccount {
+    int acc_no;
+    char name[50];
+    float balance;
+};
+
+int main() {
+    union BankAccount account;
+    int choice;
+
+    printf("Bank Account Information (Using Union)\n");
+    printf("1. Store Account Number\n");
+    printf("2. Store Name\n");
+    printf("3. Store Balance\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    switch(choice) {
+        case 1:
+            printf("Enter Account Number: ");
+            scanf("%d", &account.acc_no);
+            printf("Stored Account Number: %d\n", account.acc_no);
+            break;
+
+        case 2:
+            printf("Enter Name: ");
+            scanf(" %[^\n]", account.name); // reads string with spaces
+            printf("Stored Name: %s\n", account.name);
+            break;
+
+        case 3:
+            printf("Enter Balance: ");
+            scanf("%f", &account.balance);
+            printf("Stored Balance: %.2f\n", account.balance);
+            break;
+
+        default:
+            printf("Invalid choice!\n");
+    }
+
+    // Memory demonstration
+    printf("\nSize of union BankAccount: %lu bytes\n", sizeof(account));
+
+    return 0;
+}
