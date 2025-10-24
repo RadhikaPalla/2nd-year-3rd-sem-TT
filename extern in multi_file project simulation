@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+// Declare the external variable
+extern int count;
+
+// Function prototype from another file
+void increment();
+
+int main() {
+    printf("Initial count: %d\n", count);
+
+    increment();
+    increment();
+
+    printf("Final count: %d\n", count);
+
+    return 0;
+}
